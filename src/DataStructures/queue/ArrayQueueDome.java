@@ -9,19 +9,19 @@ import java.util.Scanner;
 public class ArrayQueueDome {
 
 
-    //    使用数组模拟环形队列的思路分析
+    //使用数组模拟环形队列的思路分析
     public static void main(String[] args) {
 
         //创建队列类的实例
-        ArrayQueue arrayQueue = new ArrayQueue(4);
+        ArrayQueue arrayQueue = new ArrayQueue(4);//实际的存取数组值为3
         char key = ' ';
         boolean loop = true;
         Scanner sc = new Scanner(System.in);
 
         while (loop) {
-            System.out.println("s(show) 显示队列数据");
-            System.out.println("g(get) 获取队列");
-            System.out.println("a(add) 添加数据到队列");
+            System.out.print("s(show) 显示队列数据");
+            System.out.print("g(get) 获取队列");
+            System.out.print("a(add) 添加数据到队列");
             System.out.println("e(exit) 退出程序");
 
             key = sc.next().charAt(0);
@@ -73,14 +73,12 @@ public class ArrayQueueDome {
 
             maxSize = arrMaxSize;
             arr = new int[maxSize];
-            front = -1;//指向队列前部 分析出front是指向队列头的第一个位置
-            rear = -1;//指向队列尾部 分析出rear是指向队列尾的第后一个位置 既包含数值
 
         }
 
         //判断队列是否满
         public boolean ifFull() {
-            return rear == maxSize - 1;
+            return (rear + 1) % maxSize == front;
         }
 
         //判断队列是否空
@@ -96,9 +94,10 @@ public class ArrayQueueDome {
                 return;
             }
 
-            rear++;//如果队列还要位置 便添加数值
-            arr[rear] = n;
+            //如果队列还要位置 便添加数值
+            arr[rear] = n;//0
 
+            rear = (rear + 1) % maxSize; //运算符 % ：模运算，（1）、当运算符左边小于右边，结果就等于左边；（2）、当运算符左边大于右边，就和算术中的取余是一样的效果。
         }
 
         //取数据
@@ -107,9 +106,21 @@ public class ArrayQueueDome {
             if (isEmpty()) {
                 throw new RuntimeException("队列为空！");
             }
-            front++;
-            return arr[front];
+            int val = arr[front];
 
+            arr[front] = 0;
+
+            rear--;
+
+            //将第一位取走的位置补上数据
+            for (int i = 0; i < arr.length; i++) {
+                if (i != arr.length - 1) {
+                    arr[i] = arr[i + 1];
+                } else {
+                    arr[i] = 0;
+                }
+            }
+            return val;
         }
 
         //显示数组数据
@@ -123,7 +134,10 @@ public class ArrayQueueDome {
 
             for (int i = 0; i < arr.length; i++) {
 
-                System.out.printf("arr[%d]=%d\t", i, arr[i]);
+                if (arr[i] != 0) {
+                    System.out.printf("arr[%d]=%d\t", i, arr[i]);
+                }
+
 
             }
 
