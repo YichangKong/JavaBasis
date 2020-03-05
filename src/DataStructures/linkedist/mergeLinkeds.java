@@ -5,7 +5,6 @@ package DataStructures.linkedist;
  * @create 2020-03-04-16:24
  */
 public class mergeLinkeds {
-
     public static void main(String[] args) {
         //创建测试数据
         HeroNode hero1 = new HeroNode(1, "宋江1", "及时雨1");
@@ -16,12 +15,12 @@ public class mergeLinkeds {
         HeroNode hero9 = new HeroNode(9, "宋江9", "及时雨9");
         HeroNode hero5 = new HeroNode(5, "宋江5", "及时雨5");
 
-        singleLinkedList list = new singleLinkedList();
+        singleLinkedList list1 = new singleLinkedList();
         singleLinkedList list2 = new singleLinkedList();
 
-        list.add(hero1);
-        list.add(hero3);
-        list.add(hero7);
+        list1.add(hero1);
+        list1.add(hero3);
+        list1.add(hero7);
 
         list2.add(hero4);
         list2.add(hero5);
@@ -29,12 +28,88 @@ public class mergeLinkeds {
 
 
         System.out.println("链表1");
-        list.showList();
+        list1.showList();
         System.out.println("链表2");
         list2.showList();
         System.out.println("合并两个有顺链表");
 
+        singleLinkedList list3 = merge(list1, list2);
 
+        list3.showList();
+
+
+    }
+    //将两个链表进行顺序合并
+
+    public static singleLinkedList merge(singleLinkedList list1, singleLinkedList list2) {
+
+        singleLinkedList merges = new singleLinkedList();
+
+        HeroNode mergesHead = merges.head;
+
+
+        //进行数据赋值
+        HeroNode head1 = list1.head;
+        HeroNode head2 = list2.head;
+
+        //先进行逻辑分析 将两个有序列表进行合并
+        //1. 将其中的一条链表进行复制
+
+        while (true) {
+            //遍历第一条数据链表
+            if (head1.next != null) {
+                mergesHead.next = head1.next;
+            } else {
+                break;
+            }
+
+            //循环遍历
+            mergesHead = mergesHead.next;
+            head1 = head1.next;
+        }
+
+        //这里遍历完成之后  mergesHead已经将指针指到最后一个位置 怎么操作？？？
+        //解决办法就是将merg链表复制一份  第一个遍历的数据链表
+
+        mergesHead = merges.head;
+
+
+        //2.在已经复制第一条数据的基础上进行顺序比较 在进行数据插入
+
+        while (true) {
+            HeroNode cur = null;
+            HeroNode temp = head2.next;
+
+            if (mergesHead.next == null) {
+            }
+
+
+            //第一种情况 1 < 2 < 3 将head2插入主链
+            if (temp.no > mergesHead.next.no & temp.no < mergesHead.next.next.no) {
+
+                cur = mergesHead.next.next;
+
+                mergesHead.next.next = new HeroNode(temp.no, temp.name, temp.nickname);
+
+                mergesHead.next.next.next = cur;
+
+//                将指针下移
+
+                temp = temp.next;
+
+            } else if (temp.no > mergesHead.next.no) {
+
+            }
+
+            break;
+
+
+        }
+
+        //指针下移
+        mergesHead = mergesHead.next;
+
+        return merges;
     }
 
 

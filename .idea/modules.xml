@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/JavaBasis.iml" filepath="$PROJECT_DIR$/JavaBasis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/JavaApiDome.iml" filepath="$PROJECT_DIR$/JavaApiDome.iml" />
     </modules>
   </component>
 </project>
