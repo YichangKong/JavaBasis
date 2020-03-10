@@ -34,7 +34,7 @@ public class SingleLinkedListDome {
 
     }
 
-    //定义singlelinkedList 管理我们的英雄
+    //定义singletlinkedLis 管理我们的英雄
     static class singleLinkedList {
 
 

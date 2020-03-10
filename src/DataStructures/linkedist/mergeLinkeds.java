@@ -75,12 +75,24 @@ public class mergeLinkeds {
 
 
         //2.在已经复制第一条数据的基础上进行顺序比较 在进行数据插入
+        HeroNode temp = head2.next;
 
         while (true) {
             HeroNode cur = null;
-            HeroNode temp = head2.next;
 
+            //这里考虑到最后的mergesHead.next.next.no 可能为空
             if (mergesHead.next == null) {
+
+                break;
+            }
+            if (mergesHead.next.next == null) {
+
+                //直接插入数据
+
+                mergesHead.next.next = new HeroNode(temp.no, temp.name, temp.nickname);
+
+                break;
+
             }
 
 
@@ -93,22 +105,26 @@ public class mergeLinkeds {
 
                 mergesHead.next.next.next = cur;
 
-//                将指针下移
+                //将指针下移
 
                 temp = temp.next;
 
-            } else if (temp.no > mergesHead.next.no) {
+                //主链的第一个大于 二链的第一个
+            } else if (temp.no < mergesHead.next.no) {
+
+                cur = mergesHead.next.next;
+                mergesHead.next = new HeroNode(temp.no, temp.name, temp.nickname);
+                mergesHead.next.next = cur;
+
+                temp = temp.next;
 
             }
 
-            break;
 
+            //指针下移
+            mergesHead = mergesHead.next;
 
         }
-
-        //指针下移
-        mergesHead = mergesHead.next;
-
         return merges;
     }
 
