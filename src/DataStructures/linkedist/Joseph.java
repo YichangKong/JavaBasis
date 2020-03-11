@@ -9,11 +9,11 @@ public class Joseph {
 
     public static void main(String[] args) {
 
-        //创建list管
+        //创建 list管API
         CircleSingleLinkedList list = new CircleSingleLinkedList();
-        list.addBoy(5);
+        list.addBoy(25);
         list.show();
-        list.out(1, 2);
+        list.out(4, 2);
 
     }
 
