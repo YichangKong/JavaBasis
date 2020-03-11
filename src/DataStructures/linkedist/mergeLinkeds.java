@@ -3,6 +3,7 @@ package DataStructures.linkedist;
 /**
  * @author yichangkong
  * @create 2020-03-04-16:24
+ * 两顺序链表合并
  */
 public class mergeLinkeds {
     public static void main(String[] args) {
