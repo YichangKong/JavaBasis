@@ -15,6 +15,11 @@ public class LinkleStackDemo {
         listInt.add(3);
         listInt.add(4);
         listInt.add(5);
+        // listInt.add(5);
+
+        System.out.println(listInt.pop());
+        System.out.println(listInt.pop());
+        System.out.println(listInt.pop());
 
         listInt.list();
 
@@ -64,6 +69,33 @@ public class LinkleStackDemo {
 
             }
 
+        }
+
+        //取值 pop
+        public int pop() {
+            int val = 0;
+            //根据index 的最后值 来进行遍历
+            if (ifEmpty()) return val;
+
+            linkedList temp = head;
+            while (true) {
+                if (temp.next != null) {
+
+                    if (temp.next.index == ind - 1) {
+
+                        //进行赋值 再进行删除 将指针下移
+                        val = temp.next.val;
+                        temp.next = null;
+                        ind--;
+                        return val;
+
+                    } else {
+                        //循环遍历
+                        temp = temp.next;
+                    }
+                }
+
+            }
         }
 
         //取值 index 指针值
