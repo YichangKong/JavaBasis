@@ -19,7 +19,7 @@ public class ComputerStack {
     public static void main(String[] args) {
 
         //定义两栈  计算3+6*2-2
-        String string = "3+6*2*2-2*2-1";//如果两二级连续出现便会出错
+        String string = "30-1*20+2";//如果两二级连续出现便会出错
 
         //定义一个符号优先级数组
         symbols = new char[4];
@@ -40,11 +40,29 @@ public class ComputerStack {
         int flag = 0;
         //将字符串转换成数组
         char[] chars = str.toCharArray();
-        for (char c : chars) {
+        //解决多位数问题
+        String KeepNum = "";
+        int index = -1;
 
+
+        for (char c : chars) {
+            index++;
             if (c >= '0' && c <= '9') {
-                //如果是数字直接添加
-                numStack.add(Integer.parseInt(String.valueOf(c)));
+                //解决多位数问题 如果是数字直接添加
+                //如果当前遍历到最后一位直接入栈
+                if ((index + 1) == chars.length) {
+                    numStack.add(Integer.parseInt(String.valueOf(c)));
+                } else {
+                    KeepNum += c;
+                    //判断下一位的字符是否为数字 如果不是数字就开始入栈 再将将keepNum清空
+                    if (isOper(chars[index + 1])) {
+                        numStack.add(Integer.parseInt(KeepNum));
+                        KeepNum = "";
+                    }
+
+                }
+
+
             } else {
                 if (symbolStack.size() == 0) {
                     symbolStack.add(c);
@@ -69,6 +87,9 @@ public class ComputerStack {
                         flag = 0;
 
                         //数栈中pop出两个数,在从符号栈中pop出一个符号，进行运算
+
+                        System.out.println(numStack);
+
                         int val2 = numStack.pop();
                         int val1 = numStack.pop();
                         Character cs = symbolStack.pop();
@@ -90,6 +111,10 @@ public class ComputerStack {
 
         //给表达式赋值
         return (Integer) numStack.pop();
+    }
+
+    private static boolean isOper(char c) {
+        return (c >= '0' && c <= '9') ? false : true;
     }
 
     static public void mySwicth(char cs, int val1, int val2) {
@@ -118,6 +143,7 @@ public class ComputerStack {
 //判断是否为运算符号  和优先级  +- index 12  第一级 */ index3 4
 
     static public int isSymbol(char val) {
+
         int outlook = 1;
         for (char c : symbols) {
             if (val == c) {
