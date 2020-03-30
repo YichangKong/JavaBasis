@@ -15,8 +15,8 @@ public class SmallExercises {
 
         Scanner sc = new Scanner(System.in);
 
-        //int[] ints = new int[]{5, 45, 2, 3, 4, 78, 6, 36, 52, 89};
-        //测试数据
+        //int[] ints = new int[]{5, 45, 2, 3, 4, 78, 6, 36, 52, 89}; //测试数据
+
 
         int[] ints = new int[10];
 
@@ -24,10 +24,9 @@ public class SmallExercises {
             ints[i] = sc.nextInt();
         }
         System.out.println("Sort comparison by default!");
-        //比较排序
-        comparisonSorting(ints);
-        //选择排序
-        //SelectionSort(ints);
+
+        comparisonSorting(ints);//比较排序
+        //选择排序SelectionSort(ints);
         cycle(ints);
         System.out.println("the_input_session_is_over");
     }
